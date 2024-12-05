@@ -48,16 +48,14 @@ function AuthProvider(props) {
 	}, []);
 
 	async function createUser(userData) {
-		fetch(
-			"https://do9tpepl85.execute-api.eu-central-1.amazonaws.com/Dev/account-management/createUser",
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(userData)
-			}
-		)
+		console.log(userData);
+		fetch(process.env.REACT_APP_BASE_URL + "/account/createUser", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(userData)
+		})
 			.then((response) => {
 				return response.json();
 			})

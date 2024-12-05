@@ -9,16 +9,13 @@ function ContentProvider(props) {
 	const navigate = useNavigate();
 
 	function postModule(module) {
-		fetch(
-			"https://do9tpepl85.execute-api.eu-central-1.amazonaws.com/Dev/module-management/postModule",
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(module)
-			}
-		)
+		fetch(process.env.REACT_APP_BASE_URL + "/module/postModule", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(module)
+		})
 			.then((response) => {
 				return response.json();
 			})
@@ -31,16 +28,13 @@ function ContentProvider(props) {
 	}
 
 	function updateModule(module) {
-		fetch(
-			"https://do9tpepl85.execute-api.eu-central-1.amazonaws.com/Dev/module-management/updateModule",
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(module)
-			}
-		)
+		fetch(process.env.REACT_APP_BASE_URL + "/module/updateModule", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(module)
+		})
 			.then((response) => {
 				return response.json();
 			})
@@ -59,7 +53,8 @@ function ContentProvider(props) {
 
 	function getModule(moduleId) {
 		return fetch(
-			"https://do9tpepl85.execute-api.eu-central-1.amazonaws.com/Dev/module-management/getModule?ModuleId=" +
+			process.env.REACT_APP_BASE_URL +
+				"/module/getModule?ModuleId=" +
 				moduleId,
 			{
 				method: "GET",
@@ -80,15 +75,12 @@ function ContentProvider(props) {
 	}
 
 	function getModules() {
-		fetch(
-			"https://do9tpepl85.execute-api.eu-central-1.amazonaws.com/Dev/module-management/getModules",
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json"
-				}
+		fetch(process.env.REACT_APP_BASE_URL + "/module/getModules", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
 			}
-		)
+		})
 			.then((response) => {
 				return response.json();
 			})
@@ -105,21 +97,18 @@ function ContentProvider(props) {
 				"Weet je zeker dat je de module " + title + " wilt verwijderen?"
 			)
 		) {
-			fetch(
-				"https://do9tpepl85.execute-api.eu-central-1.amazonaws.com/Dev/module-management/deleteModule",
-				{
-					method: "DELETE",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify({ moduleId: moduleId })
-				}
-			)
+			fetch(process.env.REACT_APP_BASE_URL + "/module/deleteModule", {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ moduleId: moduleId })
+			})
 				.then((response) => {
 					return response.json();
 				})
 				.then((data) => {
-					if (data.status === 200) {
+					if (data.statusCode === 200) {
 						alert("Module verwijderd");
 						navigateTo("/keuzemodulen");
 					}
@@ -129,7 +118,7 @@ function ContentProvider(props) {
 
 	function postRegistration(data) {
 		fetch(
-			"https://do9tpepl85.execute-api.eu-central-1.amazonaws.com/Dev/registration-management/postRegistration",
+			process.env.REACT_APP_BASE_URL + "/registration/postRegistration",
 			{
 				method: "POST",
 				headers: {
@@ -142,7 +131,7 @@ function ContentProvider(props) {
 				return response.json();
 			})
 			.then((data) => {
-				if (data.status === 200) {
+				if (data.statusCode === 200) {
 					alert("Geregristreerd");
 					navigate("/");
 				}

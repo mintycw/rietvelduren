@@ -42,13 +42,16 @@ function ModuleItem({ item, index }) {
 			)}
 
 			{item.type === "orderedList" && (
-				<ol className="list-inside list-decimal">
+				<ol className="h-min list-inside list-decimal">
 					{item.content.map((listItem, innerIndex) => (
-						<li key={innerIndex} className="mb-2 flex items-center">
-							<span className="mx-5 w-4 text-left">
+						<li
+							key={innerIndex}
+							className="mb-2 flex w-full flex-row items-center"
+						>
+							<span className="w-10 text-left text-black">
 								{innerIndex + 1}.
 							</span>
-							<p className={`text-lg`}>{listItem}</p>
+							<span className="w-full text-lg">{listItem}</span>
 						</li>
 					))}
 				</ol>
